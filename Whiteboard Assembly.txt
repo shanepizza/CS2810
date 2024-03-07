@@ -1,0 +1,22 @@
+Q1)
+	li a,12
+	li b,5
+	add a,a,b
+
+Q2)
+	li a,12
+	li b,5
+	addi a,a,5
+	addi b,b,3
+	sub a,a,b
+
+Q3)
+	li a,12
+	addi b,a,-6
+	add c,a,a
+	add c,c,a
+	add c,c,a
+	add c,c,a
+	addi b,b,-5
+	add b,c,b
+	sub b,b,a

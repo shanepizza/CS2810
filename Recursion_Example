@@ -1,0 +1,59 @@
+.data 
+	Space 		.asciiz " "
+
+
+
+
+
+
+li $s0, 100
+#load into argument registers 
+move $a0, $s0
+
+
+#Jump and Link to the recursive method
+	jal RecursiveSum #Initial Call of RecursiveSum method
+
+#Jump to end label
+	j End #Fall through will send us here
+	
+	
+	
+	
+	
+	
+	
+RecursiveSum: #Beginning of RecursiveSum method
+	beq $a0, 0, JumpToRa
+# Not sure what we are doing here
+	
+	#Save current value of "amount" to memory
+		sw $a0, ($sp)
+		addi $sp, $sp, -4
+	
+	#save Ra to memory
+		sw $ra, ($sp)
+		addi $sp, $sp, -4
+		
+#we moved this down here for some reason
+	addi $t0, $a0, -1	
+	move $a0, $t0
+
+#this is the return jump address for future calls of the RecuriveSum method
+	jal RecursiveSum
+	
+	#How we want the return values to act
+		addi $sp, $sp, 4
+		lw $ra, ($sp)
+		addi $sp, $sp, 4
+		lw $t0, ($sp)
+		add $v0, $v0, $t0
+	#End of the code block
+
+	jr $ra #This is the end of the method and sends up back to whatever the address of $ra is
+	
+	
+JumpToRa:
+	jr $ra
+
+End:
